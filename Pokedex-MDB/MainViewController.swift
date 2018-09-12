@@ -26,6 +26,7 @@ class MainViewController: UIViewController {
         pokemonButton.center = CGPoint.init(x: view.frame.width / 2, y: view.frame.height / 2)
         pokemonButton.backgroundColor = .black
         pokemonButton.setTitle("Pokemon", for: .normal)
+        pokemonButton.addTarget(self, action: #selector(segueToPokemonSearchVC), for: .touchUpInside)
         self.view.addSubview(pokemonButton)
         
         categoryButton = UIButton.init(frame: CGRect.init(x: 0, y: 0, width: view.frame.width / 3, height: 50))
@@ -40,7 +41,10 @@ class MainViewController: UIViewController {
         randomButton.setTitle("Randomize!", for: .normal)
         self.view.addSubview(randomButton)
         
-        
+    }
+    
+    @objc func segueToPokemonSearchVC() {
+        performSegue(withIdentifier: "toPokemonSearchVC", sender: self)
     }
 
     override func didReceiveMemoryWarning() {

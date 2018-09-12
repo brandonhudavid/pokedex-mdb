@@ -37,10 +37,28 @@
                         <viewLayoutGuide key="safeArea" id="tc3-Cn-dl3"/>
                     </view>
                     <navigationItem key="navigationItem" id="qCT-9A-acM"/>
+                    <connections>
+                        <segue destination="4To-oz-ebo" kind="show" identifier="toPokemonSearchVC" id="SGo-h9-tbq"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lpy-sr-Uvr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-14" y="-47"/>
+        </scene>
+        <!--Pokemon Search View Controller-->
+        <scene sceneID="rL0-uU-Xba">
+            <objects>
+                <viewController id="4To-oz-ebo" customClass="PokemonSearchViewController" customModule="Pokedex_MDB" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="HBE-P4-myR">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="Hea-FQ-0zO"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="OQs-0Z-arv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="812" y="-47"/>
         </scene>
     </scenes>
 </document>
