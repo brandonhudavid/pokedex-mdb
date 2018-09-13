@@ -26,6 +26,4 @@ extension PokemonSearchViewController: UITableViewDataSource, UITableViewDelegat
             return UITableViewCell()
         }
     }
-    
-    
 }

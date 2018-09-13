@@ -9,9 +9,14 @@
 import UIKit
 
 class Constants {
-    var roundWidthHeight = 4.0
+    var roundWidthHeight = 16.0
     
-    var lightOrange = UIColor(red: 255.0/255.0, green: 183.0/255.0, blue: 50.0/255.0, alpha: 1.0)
-    var darkOrange = UIColor(red: 246.0/255.0, green: 172.0/255.0, blue: 41.0/255.0, alpha: 1.0)
+    var lightOrange = UIColor(red: 248.0/255.0, green: 200.0/255.0, blue: 153.0/255.0, alpha: 1.0)
+    var medOrange = UIColor(red: 243.0/255.0, green: 159.0/255.0, blue: 76.0/255.0, alpha: 1.0)
+    var darkOrange = UIColor(red: 248.0/255.0, green: 118.0/255.0, blue: 0.0/255.0, alpha: 1.0)
+    var white = UIColor(red: 255.0/255.0, green: 255.0/255.0, blue: 255.0/255.0, alpha: 1.0)
+    var silver = UIColor(red: 211.0/255.0, green: 211.0/255.0, blue: 211.0/255.0, alpha: 1.0)
+    var darkGrey = UIColor(red: 102.0/255.0, green: 102.0/255.0, blue: 102.0/255.0, alpha: 1.0)
+    var black = UIColor(red: 0.0/255.0, green: 0.0/255.0, blue: 0.0/255.0, alpha: 1.0)
 
 }
