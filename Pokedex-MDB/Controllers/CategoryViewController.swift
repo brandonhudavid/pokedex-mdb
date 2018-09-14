@@ -8,8 +8,8 @@
 
 import UIKit
 
-class CategorySelectViewController: UIViewController {
-
+class CategoryViewController: UIViewController {
+    
     var typeButton : UIButton!
     var pointButton : UIButton!
     var startButton : UIButton!
@@ -35,6 +35,8 @@ class CategorySelectViewController: UIViewController {
     
     var constants = Constants()
     
+    @IBOutlet var typesCollection : UICollectionView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -44,10 +46,27 @@ class CategorySelectViewController: UIViewController {
         createIcons()
         createTextFields()
         
+        createTypes()
+        
         createSearchButton()
-
     }
-    
+
+    private func createTypes()
+    {
+        let layout = UICollectionViewFlowLayout()
+
+        layout.minimumLineSpacing = 0
+        layout.minimumInteritemSpacing = 0
+
+        typesCollection = UICollectionView(frame: CGRect(x: 0, y: 80, width: view.frame.width, height: view.frame.height / 2), collectionViewLayout: layout)
+        typesCollection.register(TypeCell.self, forCellWithReuseIdentifier: "typeCell")
+        typesCollection.backgroundColor = .black
+        
+        typesCollection.delegate = self
+        typesCollection.dataSource = self
+        
+        view.addSubview(typesCollection)
+    }
     private func createIcons()
     {
         attackIcon = UIImageView(frame: CGRect(x: 0, y: 0, width: view.frame.width / 5, height: view.frame.height / 5))

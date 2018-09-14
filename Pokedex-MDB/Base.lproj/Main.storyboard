@@ -61,54 +61,20 @@
             </objects>
             <point key="canvasLocation" x="812" y="-47"/>
         </scene>
-        <!--Category Select View Controller-->
+        <!--Category View Controller-->
         <scene sceneID="QJH-52-Wi7">
             <objects>
-                <viewController id="3NK-rx-mmh" customClass="CategorySelectViewController" customModule="Pokedex_MDB" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="3NK-rx-mmh" customClass="CategoryViewController" customModule="Pokedex_MDB" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="FQI-ra-xwD">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="MTR-Qc-F9D"/>
                     </view>
-                    <connections>
-                        <segue destination="BZH-rs-R99" kind="show" identifier="toPointSearchVC" id="6Pf-xs-ZfS"/>
-                        <segue destination="uGF-HK-p7z" kind="show" identifier="toTypeSearchVC" id="QAz-ve-Xj3"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4CQ-8g-17c" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="399" y="730"/>
-        </scene>
-        <!--Point Search View Controller-->
-        <scene sceneID="Oib-v1-5od">
-            <objects>
-                <viewController id="BZH-rs-R99" customClass="PointSearchViewController" customModule="Pokedex_MDB" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="fEe-9S-dJV">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="K52-E4-2UA"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="9w1-gw-cfF" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-15" y="1470"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="yJx-yR-OSQ">
-            <objects>
-                <viewController id="uGF-HK-p7z" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="Ji5-E3-DPf">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="nYT-fy-Sem"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="pLk-vl-d71" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="812" y="1469"/>
         </scene>
     </scenes>
 </document>

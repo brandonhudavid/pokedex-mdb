@@ -6,6 +6,7 @@
 //  Copyright © 2018 Brandon David. All rights reserved.
 //
 
+import Foundation
 import UIKit
 
 class PokemonSearchViewController: UIViewController {

@@ -9,7 +9,6 @@
 import UIKit
 
 class Constants {
-    var roundWidthHeight = 16.0
     
     var lightOrange = UIColor(red: 248.0/255.0, green: 200.0/255.0, blue: 153.0/255.0, alpha: 1.0)
     var medOrange = UIColor(red: 243.0/255.0, green: 159.0/255.0, blue: 76.0/255.0, alpha: 1.0)
@@ -18,5 +17,7 @@ class Constants {
     var silver = UIColor(red: 211.0/255.0, green: 211.0/255.0, blue: 211.0/255.0, alpha: 1.0)
     var darkGrey = UIColor(red: 102.0/255.0, green: 102.0/255.0, blue: 102.0/255.0, alpha: 1.0)
     var black = UIColor(red: 0.0/255.0, green: 0.0/255.0, blue: 0.0/255.0, alpha: 1.0)
+
+    let pokemonTypes = ["Water", "Fire", "Grass", "Rock", "Electric", "Flying", "Ice", "Ground", "Bug", "Steel", "Dark", "Poison", "Normal", "Dragon", "Fighting", "Ghost", "Fairy", "Psychic"]
 
 }
