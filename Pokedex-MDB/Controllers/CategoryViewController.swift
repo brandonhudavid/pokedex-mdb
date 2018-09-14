@@ -1,19 +1,30 @@
 //
-//  PointSearchViewController.swift
+//  CategorySelectViewController.swift
 //  Pokedex-MDB
 //
-//  Created by Isabella Lau on 9/12/18.
+//  Created by Isabella Lau on 9/11/18.
 //  Copyright © 2018 Brandon David. All rights reserved.
 //
 
 import UIKit
 
-class PointSearchViewController: UIViewController {
+class CategoryViewController: UIViewController {
+    
+    var typeButton : UIButton!
+    var pointButton : UIButton!
+    var startButton : UIButton!
+    var searchButton : UIButton!
 
+    var trophyImage : UIImage!
+    var boxImage : UIImage!
+    
+    var typesLabel : UILabel!
+    var pointsLabel : UILabel!
+    var searchLabel : UILabel!
     var attackLabel : UILabel!
     var defenseLabel : UILabel!
     var healthLabel : UILabel!
-
+    
     var attackIcon : UIImageView!
     var defenseIcon : UIImageView!
     var healthIcon : UIImageView!
@@ -22,125 +33,125 @@ class PointSearchViewController: UIViewController {
     var defenseInput : UITextField!
     var healthInput : UITextField!
     
-    var searchButton : UIButton!
-    
     var constants = Constants()
+    
+    @IBOutlet var typesCollection : UICollectionView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        createLabels()
+        view.backgroundColor = constants.white
+
         createIcons()
         createTextFields()
+        
+        createTypes()
+        
         createSearchButton()
     }
 
+    private func createTypes()
+    {
+        let layout = UICollectionViewFlowLayout()
+
+        layout.minimumLineSpacing = 10
+        layout.minimumInteritemSpacing = 10
+        layout.itemSize = CGSize(width: view.frame.width / 4, height: view.frame.width / 4)
+
+        typesCollection = UICollectionView(frame: CGRect(x: 20, y: 120, width: view.frame.width - 40, height: view.frame.height / 2 - 25), collectionViewLayout: layout)
+        typesCollection.register(TypeCell.self, forCellWithReuseIdentifier: "typeCell")
+        typesCollection.backgroundColor = constants.white
+        
+        typesCollection.delegate = self
+        typesCollection.dataSource = self
+        
+        view.addSubview(typesCollection)
+    }
     private func createIcons()
     {
-        attackIcon = UIImageView(frame: CGRect(x: 0, y: 0, width: view.frame.width / 4, height: view.frame.height / 4))
-        attackIcon.center = CGPoint(x: view.frame.width / 5, y: 2 * view.frame.height / 6)
+        attackIcon = UIImageView(frame: CGRect(x: 0, y: 0, width: view.frame.width / 5, height: view.frame.height / 5))
+        attackIcon.center = CGPoint(x: view.frame.width / 6, y: view.frame.height - 215)
         attackIcon.image = UIImage(named: "sword")
         attackIcon.contentMode = .scaleAspectFit
         view.addSubview(attackIcon)
         
-        defenseIcon = UIImageView(frame: CGRect(x: 0, y: 0, width: view.frame.width / 4, height: view.frame.height / 4))
-        defenseIcon.center = CGPoint(x: view.frame.width / 5, y: 3 * view.frame.height / 6)
+        defenseIcon = UIImageView(frame: CGRect(x: 0, y: 0, width: view.frame.width / 5, height: view.frame.height / 5))
+        defenseIcon.center = CGPoint(x: 3 * view.frame.width / 6, y: view.frame.height - 215)
         defenseIcon.image = UIImage(named: "shield")
         defenseIcon.contentMode = .scaleAspectFit
         view.addSubview(defenseIcon)
         
-        healthIcon = UIImageView(frame: CGRect(x: 0, y: 0, width: view.frame.width / 4, height: view.frame.height / 4))
-        healthIcon.center = CGPoint(x: view.frame.width / 5, y: 4 * view.frame.height / 6)
+        healthIcon = UIImageView(frame: CGRect(x: 0, y: 0, width: view.frame.width / 5, height: view.frame.height / 5))
+        healthIcon.center = CGPoint(x: 5 * view.frame.width / 6, y: view.frame.height - 215)
         healthIcon.image = UIImage(named: "heart")
         healthIcon.contentMode = .scaleAspectFit
         view.addSubview(healthIcon)
     }
     
-    private func createLabels()
-    {
-        attackLabel = UILabel(frame: CGRect(x: 0, y: 0, width: view.frame.width / 2, height: 50))
-        attackLabel.text = "Attack"
-        attackLabel.font = UIFont(name: "AmericanTypewriter", size: 35.0)
-        attackLabel.textAlignment = .left
-        attackLabel.center = CGPoint(x: 2 * view.frame.width / 3, y: 7 * view.frame.height / 24)
-        view.addSubview(attackLabel)
-        
-        defenseLabel = UILabel(frame: CGRect(x: 0, y: 0, width: view.frame.width / 2, height: 50))
-        defenseLabel.text = "Defense"
-        defenseLabel.font = UIFont(name: "AmericanTypewriter", size: 35.0)
-        defenseLabel.textAlignment = .left
-        defenseLabel.center = CGPoint(x: 2 * view.frame.width / 3, y: 11 * view.frame.height / 24)
-        view.addSubview(defenseLabel)
-        
-        healthLabel = UILabel(frame: CGRect(x: 0, y: 0, width: view.frame.width / 2, height: 50))
-        healthLabel.text = "Health"
-        healthLabel.font = UIFont(name: "AmericanTypewriter", size: 35.0)
-        healthLabel.textAlignment = .left
-        healthLabel.center = CGPoint(x: 2 * view.frame.width / 3, y: 15 * view.frame.height / 24)
-        view.addSubview(healthLabel)
-    }
-    
     private func createTextFields()
     {
-        attackInput = UITextField(frame: CGRect(x: 0, y: 0, width: view.frame.width / 2, height: 40))
-        attackInput.center = CGPoint(x: 2 * view.frame.width / 3, y: 17 * view.frame.height / 48)
+        attackInput = UITextField(frame: CGRect(x: 0, y: 0, width:  view.frame.width / 4, height: 40))
+        attackInput.center = CGPoint(x: view.frame.width / 6, y: view.frame.height - 150)
         attackInput.borderStyle = UITextBorderStyle.roundedRect
         attackInput.font = UIFont(name: "AmericanTypewriter", size: 18.0)
-        attackInput.placeholder = "Minimum attack";
+        attackInput.placeholder = "Attack";
         attackInput.autocorrectionType = UITextAutocorrectionType.no
         attackInput.keyboardType = UIKeyboardType.default;
         attackInput.returnKeyType = UIReturnKeyType.done;
         attackInput.clearButtonMode = UITextFieldViewMode.whileEditing;
         attackInput.contentVerticalAlignment = UIControlContentVerticalAlignment.center;
-
+        
         view.addSubview(attackInput)
         
-        defenseInput = UITextField(frame: CGRect(x: 0, y: 0, width: view.frame.width / 2, height: 40))
-        defenseInput.center = CGPoint(x: 2 * view.frame.width / 3, y: 25 * view.frame.height / 48)
+        defenseInput = UITextField(frame: CGRect(x: 0, y: 0, width: view.frame.width / 4, height: 40))
+        defenseInput.center = CGPoint(x: 3 * view.frame.width / 6, y: view.frame.height - 150)
         defenseInput.borderStyle = UITextBorderStyle.roundedRect
         defenseInput.font = UIFont(name: "AmericanTypewriter", size: 18.0)
-        defenseInput.placeholder = "Minimum defense";
+        defenseInput.placeholder = "Defense";
         defenseInput.autocorrectionType = UITextAutocorrectionType.no
         defenseInput.keyboardType = UIKeyboardType.default;
         defenseInput.returnKeyType = UIReturnKeyType.done;
         defenseInput.clearButtonMode = UITextFieldViewMode.whileEditing;
         defenseInput.contentVerticalAlignment = UIControlContentVerticalAlignment.center;
-
+        
         view.addSubview(defenseInput)
         
-        healthInput = UITextField(frame: CGRect(x: 0, y: 0, width: view.frame.width / 2, height: 40))
-        healthInput.center = CGPoint(x: 2 * view.frame.width / 3, y: 33 * view.frame.height / 48)
+        healthInput = UITextField(frame: CGRect(x: 0, y: 0, width: view.frame.width / 4, height: 40))
+        healthInput.center = CGPoint(x: 5 * view.frame.width / 6, y: view.frame.height - 150)
         healthInput.borderStyle = UITextBorderStyle.roundedRect
         healthInput.font = UIFont(name: "AmericanTypewriter", size: 18.0)
-        healthInput.placeholder = "Minimum health";
+        healthInput.placeholder = "Health";
         healthInput.autocorrectionType = UITextAutocorrectionType.no
         healthInput.keyboardType = UIKeyboardType.default;
         healthInput.returnKeyType = UIReturnKeyType.done;
         healthInput.clearButtonMode = UITextFieldViewMode.whileEditing;
         healthInput.contentVerticalAlignment = UIControlContentVerticalAlignment.center;
-
+        
         view.addSubview(healthInput)
     }
     
     private func createSearchButton() {
         searchButton = UIButton.init(frame: CGRect.init(x: 0, y: 0, width: view.frame.width / 3, height: 50))
-        searchButton.center = CGPoint.init(x: view.frame.width / 2, y: view.frame.height - 100)
+        searchButton.center = CGPoint.init(x: view.frame.width / 2, y: view.frame.height - 75)
         searchButton.backgroundColor = constants.medOrange
         searchButton.setTitle("Search", for: .normal)
-        searchButton.addTarget(self, action: #selector(pointsClicked), for: .touchUpInside)
+        searchButton.addTarget(self, action: #selector(searchClicked), for: .touchUpInside)
         self.view.addSubview(searchButton)
     }
     
-    @objc func pointsClicked()
+    @objc func searchClicked()
     {
-        // performSegue(withIdentifier: "toPointSearchVC", sender: self)
-        
+        performSegue(withIdentifier: "toResultsVC", sender: self)
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destinationViewController.
+        // Pass the selected object to the new view controller.
+    }
 }

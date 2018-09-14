@@ -6,6 +6,7 @@
 //  Copyright © 2018 Brandon David. All rights reserved.
 //
 
+import Foundation
 import UIKit
 
 class PokemonSearchViewController: UITableViewController, UISearchResultsUpdating {
@@ -80,14 +81,14 @@ class PokemonSearchViewController: UITableViewController, UISearchResultsUpdatin
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "toProfileVC", sender: <#T##Any?#>)
+        performSegue(withIdentifier: "toProfileVC", sender: self)
     }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "toProfileVC" {
-            let profileVC = segue.destination as! ProfileViewController
-            profileVC.pokemonName = self.pokemonDictionary[
-        }
-    }
+
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if segue.identifier == "toProfileVC" {
+//            let profileVC = segue.destination as! ProfileViewController
+//            profileVC.pokemonName = self.pokemonDictionary[]
+//        }
+//    }
 
 }
