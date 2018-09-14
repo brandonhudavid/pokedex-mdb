@@ -13,111 +13,116 @@ class CategorySelectViewController: UIViewController {
     var typeButton : UIButton!
     var pointButton : UIButton!
     var startButton : UIButton!
-    
+    var searchButton : UIButton!
+
     var trophyImage : UIImage!
     var boxImage : UIImage!
     
     var typesLabel : UILabel!
     var pointsLabel : UILabel!
     var searchLabel : UILabel!
+    var attackLabel : UILabel!
+    var defenseLabel : UILabel!
+    var healthLabel : UILabel!
+    
+    var attackIcon : UIImageView!
+    var defenseIcon : UIImageView!
+    var healthIcon : UIImageView!
+    
+    var attackInput : UITextField!
+    var defenseInput : UITextField!
+    var healthInput : UITextField!
     
     var constants = Constants()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        view.backgroundColor = constants.lightOrange
+        view.backgroundColor = constants.white
 
-        createSearchLabel()
-        createTypeButton()
-        createPointButton()
-        createTypesLabel()
-        createPointsLabel()
-    }
-    
-    private func createSearchLabel()
-    {
-        searchLabel = UILabel(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 50))
-        searchLabel.text = "Search By"
-        searchLabel.font = UIFont(name: "AmericanTypewriter", size: 35.0)
-        searchLabel.textAlignment = .center
-        searchLabel.center = CGPoint(x: view.frame.width / 2, y: view.frame.height - 480)
-        view.addSubview(searchLabel)
-    }
-    
-    private func createTypeButton() {
-        typeButton = UIButton(type: .custom) as UIButton
-        typeButton.setTitle("Types", for: .normal)
-        typeButton.titleLabel?.font = UIFont(name: "AmericanTypewriter", size: 25.0)!
-        typeButton.setTitleColor(constants.black, for: .normal)
-        typeButton.backgroundColor = constants.white
+        createIcons()
+        createTextFields()
+        
+        createSearchButton()
 
-        boxImage = UIImage(named: "types")
-        typeButton.setImage(boxImage, for: .normal)
-        
-        typeButton.frame = CGRect(x: 0, y: 0, width: CGFloat(view.frame.width / 3), height: CGFloat(view.frame.width / 3))
-        typeButton.center = CGPoint(x: view.frame.width / 4, y: view.frame.height - 350)
-        typeButton.layer.cornerRadius = CGFloat(view.frame.width / 6)
-        typeButton.layer.backgroundColor = constants.white.cgColor
-        typeButton.clipsToBounds = true
-        
-        typeButton.addTarget(self, action: #selector(typesClicked), for: .touchUpInside)
-        
-        view.addSubview(typeButton)
     }
     
-    private func createPointButton() {
-        pointButton = UIButton(type: .custom) as UIButton
-        pointButton.setTitle("Points", for: .normal)
-        pointButton.titleLabel?.font = UIFont(name: "AmericanTypewriter", size: 25.0)!
-        pointButton.setTitleColor(constants.black, for: .normal)
-        pointButton.backgroundColor = constants.white
-        
-        trophyImage = UIImage(named: "points")
-        pointButton.setImage(trophyImage, for: .normal)
-
-        pointButton.frame = CGRect(x: 0, y: 0, width: CGFloat(view.frame.width / 3), height: CGFloat(view.frame.width / 3))
-        pointButton.center = CGPoint(x: 3 * view.frame.width / 4, y: view.frame.height - 350)
-        pointButton.layer.cornerRadius = CGFloat(view.frame.width / 6)
-        pointButton.layer.backgroundColor = constants.white.cgColor
-        pointButton.clipsToBounds = true
-
-        pointButton.addTarget(self, action: #selector(pointsClicked), for: .touchUpInside)
-        
-        view.addSubview(pointButton)
-    }
-    
-    private func createTypesLabel()
+    private func createIcons()
     {
-        typesLabel = UILabel(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 50))
-        typesLabel.text = "Types"
-        typesLabel.font = UIFont(name: "AmericanTypewriter", size: 25.0)
-        typesLabel.textAlignment = .center
-        typesLabel.center = CGPoint(x: view.frame.width / 4, y: view.frame.height - 250)
-        view.addSubview(typesLabel)
+        attackIcon = UIImageView(frame: CGRect(x: 0, y: 0, width: view.frame.width / 5, height: view.frame.height / 5))
+        attackIcon.center = CGPoint(x: view.frame.width / 6, y: view.frame.height - 215)
+        attackIcon.image = UIImage(named: "sword")
+        attackIcon.contentMode = .scaleAspectFit
+        view.addSubview(attackIcon)
+        
+        defenseIcon = UIImageView(frame: CGRect(x: 0, y: 0, width: view.frame.width / 5, height: view.frame.height / 5))
+        defenseIcon.center = CGPoint(x: 3 * view.frame.width / 6, y: view.frame.height - 215)
+        defenseIcon.image = UIImage(named: "shield")
+        defenseIcon.contentMode = .scaleAspectFit
+        view.addSubview(defenseIcon)
+        
+        healthIcon = UIImageView(frame: CGRect(x: 0, y: 0, width: view.frame.width / 5, height: view.frame.height / 5))
+        healthIcon.center = CGPoint(x: 5 * view.frame.width / 6, y: view.frame.height - 215)
+        healthIcon.image = UIImage(named: "heart")
+        healthIcon.contentMode = .scaleAspectFit
+        view.addSubview(healthIcon)
     }
     
-    private func createPointsLabel()
+    private func createTextFields()
     {
-        pointsLabel = UILabel(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 50))
-        pointsLabel.text = "Points"
-        pointsLabel.font = UIFont(name: "AmericanTypewriter", size: 25.0)
-        pointsLabel.textAlignment = .center
-        pointsLabel.center = CGPoint(x: 3 * view.frame.width / 4, y: view.frame.height - 250)
-        view.addSubview(pointsLabel)
+        attackInput = UITextField(frame: CGRect(x: 0, y: 0, width:  view.frame.width / 4, height: 40))
+        attackInput.center = CGPoint(x: view.frame.width / 6, y: view.frame.height - 150)
+        attackInput.borderStyle = UITextBorderStyle.roundedRect
+        attackInput.font = UIFont(name: "AmericanTypewriter", size: 18.0)
+        attackInput.placeholder = "Attack";
+        attackInput.autocorrectionType = UITextAutocorrectionType.no
+        attackInput.keyboardType = UIKeyboardType.default;
+        attackInput.returnKeyType = UIReturnKeyType.done;
+        attackInput.clearButtonMode = UITextFieldViewMode.whileEditing;
+        attackInput.contentVerticalAlignment = UIControlContentVerticalAlignment.center;
+        
+        view.addSubview(attackInput)
+        
+        defenseInput = UITextField(frame: CGRect(x: 0, y: 0, width: view.frame.width / 4, height: 40))
+        defenseInput.center = CGPoint(x: 3 * view.frame.width / 6, y: view.frame.height - 150)
+        defenseInput.borderStyle = UITextBorderStyle.roundedRect
+        defenseInput.font = UIFont(name: "AmericanTypewriter", size: 18.0)
+        defenseInput.placeholder = "Defense";
+        defenseInput.autocorrectionType = UITextAutocorrectionType.no
+        defenseInput.keyboardType = UIKeyboardType.default;
+        defenseInput.returnKeyType = UIReturnKeyType.done;
+        defenseInput.clearButtonMode = UITextFieldViewMode.whileEditing;
+        defenseInput.contentVerticalAlignment = UIControlContentVerticalAlignment.center;
+        
+        view.addSubview(defenseInput)
+        
+        healthInput = UITextField(frame: CGRect(x: 0, y: 0, width: view.frame.width / 4, height: 40))
+        healthInput.center = CGPoint(x: 5 * view.frame.width / 6, y: view.frame.height - 150)
+        healthInput.borderStyle = UITextBorderStyle.roundedRect
+        healthInput.font = UIFont(name: "AmericanTypewriter", size: 18.0)
+        healthInput.placeholder = "Health";
+        healthInput.autocorrectionType = UITextAutocorrectionType.no
+        healthInput.keyboardType = UIKeyboardType.default;
+        healthInput.returnKeyType = UIReturnKeyType.done;
+        healthInput.clearButtonMode = UITextFieldViewMode.whileEditing;
+        healthInput.contentVerticalAlignment = UIControlContentVerticalAlignment.center;
+        
+        view.addSubview(healthInput)
     }
     
-    @objc func pointsClicked()
-    {
-        pointButton.backgroundColor = constants.silver
-        performSegue(withIdentifier: "toPointSearchVC", sender: self)
+    private func createSearchButton() {
+        searchButton = UIButton.init(frame: CGRect.init(x: 0, y: 0, width: view.frame.width / 3, height: 50))
+        searchButton.center = CGPoint.init(x: view.frame.width / 2, y: view.frame.height - 75)
+        searchButton.backgroundColor = constants.medOrange
+        searchButton.setTitle("Search", for: .normal)
+        searchButton.addTarget(self, action: #selector(searchClicked), for: .touchUpInside)
+        self.view.addSubview(searchButton)
     }
     
-    @objc func typesClicked()
+    @objc func searchClicked()
     {
-        typeButton.backgroundColor = constants.silver
-        performSegue(withIdentifier: "toTypeSearchVC", sender: self)
+        performSegue(withIdentifier: "toResultsVC", sender: self)
     }
     
     override func didReceiveMemoryWarning() {
