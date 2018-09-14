@@ -12,14 +12,24 @@ class TypeCell: UICollectionViewCell {
     
     var typeImage: UIImageView!
     var typeLabel: UILabel!
+    var typeCell: UIButton!
     
     override func awakeFromNib() {
-        typeImage = UIImageView(frame: contentView.frame)
-        typeImage.contentMode = .scaleAspectFill
+        typeImage = UIImageView(frame: CGRect(x: contentView.frame.width * 0.125, y: 0, width: contentView.frame.width * 0.75, height: contentView.frame.height * 0.75))
+        typeImage.contentMode = .scaleAspectFit
         typeImage.clipsToBounds = true
         contentView.addSubview(typeImage)
         
-        typeLabel = UILabel(frame: contentView.frame)
-         contentView.addSubview(typeLabel)
+        typeLabel = UILabel(frame: CGRect(x: 0, y: contentView.frame.height * 0.8, width: contentView.frame.width, height: contentView.frame.height * 0.2))
+        typeLabel.clipsToBounds = true
+        typeLabel.textAlignment = .center
+        typeLabel.textColor = .black
+        typeLabel.backgroundColor = .clear
+        typeLabel.font = UIFont(name: "AmericanTypewriter", size: 18.0)
+        contentView.addSubview(typeLabel)
+        
+        typeCell = UIButton(frame: CGRect(x: 0, y: 0, width: contentView.frame.width-50, height: contentView.frame.height-50))
+        typeCell.sizeToFit()
+        contentView.addSubview(typeCell)
     }
 }

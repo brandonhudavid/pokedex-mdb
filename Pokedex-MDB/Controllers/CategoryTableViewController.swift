@@ -15,7 +15,18 @@ extension CategoryViewController: UICollectionViewDelegate, UICollectionViewData
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "typeCell", for: indexPath) as? TypeCell {            
+        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "typeCell", for: indexPath) as? TypeCell {
+            
+            for subview in cell.contentView.subviews {
+                subview.removeFromSuperview()
+            }
+            
+            cell.awakeFromNib()
+            
+            cell.typeLabel.text = constants.pokemonTypes[indexPath.row]
+            cell.typeImage.image = UIImage(named: constants.pokemonTypes[indexPath.row])
+            cell.typeCell = UIB
+            
             return cell
         } else {
             return UICollectionViewCell()
@@ -26,4 +37,14 @@ extension CategoryViewController: UICollectionViewDelegate, UICollectionViewData
     {
         print("User tapped on item \(indexPath.row)")
     }
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        return CGSize(width: view.frame.width / 3 - 20, height: view.frame.width / 3 + 30)
+    }
+
 }

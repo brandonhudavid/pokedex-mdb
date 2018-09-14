@@ -55,12 +55,13 @@ class CategoryViewController: UIViewController {
     {
         let layout = UICollectionViewFlowLayout()
 
-        layout.minimumLineSpacing = 0
-        layout.minimumInteritemSpacing = 0
+        layout.minimumLineSpacing = 10
+        layout.minimumInteritemSpacing = 10
+        layout.itemSize = CGSize(width: view.frame.width / 4, height: view.frame.width / 4)
 
-        typesCollection = UICollectionView(frame: CGRect(x: 0, y: 80, width: view.frame.width, height: view.frame.height / 2), collectionViewLayout: layout)
+        typesCollection = UICollectionView(frame: CGRect(x: 20, y: 120, width: view.frame.width - 40, height: view.frame.height / 2 - 25), collectionViewLayout: layout)
         typesCollection.register(TypeCell.self, forCellWithReuseIdentifier: "typeCell")
-        typesCollection.backgroundColor = .black
+        typesCollection.backgroundColor = constants.white
         
         typesCollection.delegate = self
         typesCollection.dataSource = self
