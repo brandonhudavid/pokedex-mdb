@@ -8,48 +8,86 @@
 
 import UIKit
 
-class PokemonSearchViewController: UIViewController {
+class PokemonSearchViewController: UITableViewController, UISearchResultsUpdating {
     
+    var pokemonKeyArray = [String]()
+    var pokemonDictionary: [String : Pokemon] = [:]
+    var filteredArray = [String]()
     
-    var headerLabel: UILabel!
-    var searchBar: UISearchBar!
-
+    var searchController = UISearchController()
+    var resultController = UITableViewController()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        initializeHeader()
-        initializeSearchBar()
-        // Do any additional setup after loading the view.
+        
+        for pokemon in PokemonGenerator.pokemonArray {
+            pokemonKeyArray.append(pokemon.name)
+            pokemonDictionary[pokemon.name] = pokemon
+            var pokemonNumber = String(pokemon.number)
+            while pokemonDictionary[pokemonNumber] != nil {
+                pokemonNumber += " "
+            }
+            pokemonKeyArray.append(pokemonNumber)
+            pokemonDictionary[pokemonNumber] = pokemon
+        }
+        
+        self.searchController = UISearchController(searchResultsController: resultController)
+        tableView.tableHeaderView = self.searchController.searchBar
+        
+        self.searchController.searchResultsUpdater = self
+        self.resultController.tableView.delegate = self
+        self.resultController.tableView.dataSource = self
     }
     
-    func initializeHeader() {
-        headerLabel = UILabel.init(frame: CGRect.init(x: 0, y: 0, width: view.frame.width, height: 100))
-        headerLabel.center = CGPoint.init(x: view.frame.width / 2, y: 100)
-        headerLabel.text = "Enter a Pokemon name or #."
-        headerLabel.textAlignment = .center
-        self.view.addSubview(headerLabel)
+    func updateSearchResults(for searchController: UISearchController) {
+        self.filteredArray = pokemonKeyArray.filter({ (array: String) -> Bool in
+            if array.contains(searchController.searchBar.text!) {
+                return true
+            } else {
+                return false
+            }
+        })
+        self.resultController.tableView.reloadData()
     }
     
-    func initializeSearchBar() {
-        searchBar = UISearchBar.init(frame: CGRect.init(x: 0, y: 0, width: view.frame.width - 100, height: 50))
-        searchBar.center = CGPoint.init(x: view.frame.width / 2, y: 150)
-        searchBar.barStyle = .default
-        self.view.addSubview(searchBar)
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.filteredArray.count
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 75
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = PokemonCell()
+        cell.addName()
+        cell.addNumber()
+        cell.addImageView()
+        if self.filteredArray.count > 0 {
+            let pokemonKey = self.filteredArray[indexPath.row]
+            cell.pokemonName.text = self.pokemonDictionary[pokemonKey]?.name
+            cell.pokemonNumber.text = "# \((self.pokemonDictionary[pokemonKey]?.number)!)"
+            if let url = URL(string: (self.pokemonDictionary[pokemonKey]?.imageUrl)!) {
+                if let data = try? Data(contentsOf: url) {
+                    cell.pokemonImage.image = UIImage(data: data)
+                }
+            } else if let data = try? Data(contentsOf: URL(string: "https://upload.wikimedia.org/wikipedia/en/3/39/Pokeball.PNG")!) {
+                cell.pokemonImage.image = UIImage(data: data)
+            }
+        }
+        return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "toProfileVC", sender: <#T##Any?#>)
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "toProfileVC" {
+            let profileVC = segue.destination as! ProfileViewController
+            profileVC.pokemonName = self.pokemonDictionary[
+        }
     }
-    */
 
 }

@@ -41,5 +41,7 @@ class PokemonGenerator {
         return pokemonArray
     }
     
+    static var pokemonArray = getPokemonArray()
+    
     
 }

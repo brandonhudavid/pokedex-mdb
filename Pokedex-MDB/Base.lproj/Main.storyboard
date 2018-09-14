@@ -38,8 +38,8 @@
                     </view>
                     <navigationItem key="navigationItem" id="qCT-9A-acM"/>
                     <connections>
-                        <segue destination="4To-oz-ebo" kind="show" identifier="toPokemonSearchVC" id="SGo-h9-tbq"/>
                         <segue destination="3NK-rx-mmh" kind="show" identifier="toCategorySelectVC" id="edC-oo-xfF"/>
+                        <segue destination="nxO-TT-VBe" kind="show" identifier="toPokemonSearchVC" id="U87-uY-rXj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lpy-sr-Uvr" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -47,19 +47,50 @@
             <point key="canvasLocation" x="-14" y="-47"/>
         </scene>
         <!--Pokemon Search View Controller-->
-        <scene sceneID="rL0-uU-Xba">
+        <scene sceneID="fzy-BD-LbF">
             <objects>
-                <viewController id="4To-oz-ebo" customClass="PokemonSearchViewController" customModule="Pokedex_MDB" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="HBE-P4-myR">
+                <tableViewController id="nxO-TT-VBe" customClass="PokemonSearchViewController" customModule="Pokedex_MDB" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="osO-Cj-Ivd">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="Hea-FQ-0zO"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="DMy-it-41X">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="DMy-it-41X" id="40C-4q-gBy">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="nxO-TT-VBe" id="Yzc-mL-X2C"/>
+                            <outlet property="delegate" destination="nxO-TT-VBe" id="Bng-Xu-G0N"/>
+                        </connections>
+                    </tableView>
+                    <connections>
+                        <segue destination="Pnt-5k-Bwg" kind="show" identifier="toProfileVC" id="5gQ-LJ-JZe"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cO9-j9-na8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="975" y="-47"/>
+        </scene>
+        <!--Profile View Controller-->
+        <scene sceneID="Ylc-0A-cKj">
+            <objects>
+                <viewController id="Pnt-5k-Bwg" customClass="ProfileViewController" customModule="Pokedex_MDB" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="BAj-AD-aEn">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="U2c-6E-cRy"/>
                     </view>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="OQs-0Z-arv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="its-Yg-8tJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="812" y="-47"/>
+            <point key="canvasLocation" x="1790" y="-47"/>
         </scene>
         <!--Category Select View Controller-->
         <scene sceneID="QJH-52-Wi7">
