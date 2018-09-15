@@ -34,6 +34,7 @@ class CategoryViewController: UIViewController {
     var healthInput : UITextField!
     
     var constants = Constants()
+    var selectedTypes : [String]!
     
     @IBOutlet var typesCollection : UICollectionView!
     
@@ -41,8 +42,10 @@ class CategoryViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        view.backgroundColor = constants.white
+        view.backgroundColor = Constants.white
 
+        selectedTypes = []
+        
         createIcons()
         createTextFields()
         
@@ -61,7 +64,10 @@ class CategoryViewController: UIViewController {
 
         typesCollection = UICollectionView(frame: CGRect(x: 20, y: 120, width: view.frame.width - 40, height: view.frame.height / 2 - 25), collectionViewLayout: layout)
         typesCollection.register(TypeCell.self, forCellWithReuseIdentifier: "typeCell")
-        typesCollection.backgroundColor = constants.white
+        typesCollection.backgroundColor = Constants.white
+        
+        typesCollection.showsVerticalScrollIndicator = true
+        typesCollection.allowsMultipleSelection = true
         
         typesCollection.delegate = self
         typesCollection.dataSource = self
@@ -134,7 +140,7 @@ class CategoryViewController: UIViewController {
     private func createSearchButton() {
         searchButton = UIButton.init(frame: CGRect.init(x: 0, y: 0, width: view.frame.width / 3, height: 50))
         searchButton.center = CGPoint.init(x: view.frame.width / 2, y: view.frame.height - 75)
-        searchButton.backgroundColor = constants.medOrange
+        searchButton.backgroundColor = Constants.medOrange
         searchButton.setTitle("Search", for: .normal)
         searchButton.addTarget(self, action: #selector(searchClicked), for: .touchUpInside)
         self.view.addSubview(searchButton)
