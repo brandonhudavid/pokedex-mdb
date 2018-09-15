@@ -9,12 +9,13 @@
 import UIKit
 
 extension CategoryViewController: UICollectionViewDelegate, UICollectionViewDataSource {
-    
+
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return (constants.pokemonTypes.count)
+        return (Constants.pokemonTypes.count)
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "typeCell", for: indexPath) as? TypeCell {
             
             for subview in cell.contentView.subviews {
@@ -23,9 +24,8 @@ extension CategoryViewController: UICollectionViewDelegate, UICollectionViewData
             
             cell.awakeFromNib()
             
-            cell.typeLabel.text = constants.pokemonTypes[indexPath.row]
-            cell.typeImage.image = UIImage(named: constants.pokemonTypes[indexPath.row])
-//            cell.typeCell =
+            cell.typeLabel.text = Constants.pokemonTypes[indexPath.row]
+            cell.typeImage.image = UIImage(named: Constants.pokemonTypes[indexPath.row])
             
             return cell
         } else {
@@ -33,18 +33,24 @@ extension CategoryViewController: UICollectionViewDelegate, UICollectionViewData
         }
     }
     
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath)
-    {
-        print("User tapped on item \(indexPath.row)")
-    }
-    
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        // addToList.append(objectsArray[indexPath.row])
+        let typeCell = collectionView.cellForItem(at: indexPath) as! TypeCell
         
-        return CGSize(width: view.frame.width / 3 - 20, height: view.frame.width / 3 + 30)
+        let type = Constants.pokemonTypes[indexPath.row]
+        
+        typeCell.toggleSelected()
+        
+        if typeCell.pressed {
+            debugPrint(type)
+            selectedTypes.append(type)
+        } else {
+            debugPrint(type)
+            selectedTypes.remove(at: selectedTypes.index(of: type)!)
+        }
+        
+        debugPrint("Array: ", selectedTypes!)
+        
     }
 
 }

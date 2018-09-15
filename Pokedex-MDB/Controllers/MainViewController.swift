@@ -52,7 +52,7 @@ class MainViewController: UIViewController {
         pokemonButton = UIButton.init(frame: CGRect.init(x: 0, y: 0, width: view.frame.width / 3, height: 50))
         pokemonButton.center = CGPoint.init(x: view.frame.width / 2, y: view.frame.height / 2 + 70)
         pokemonButton.layer.cornerRadius = 10
-        pokemonButton.backgroundColor = constants.darkGrey
+        pokemonButton.backgroundColor = Constants.darkGrey
         pokemonButton.setTitle("Pokemon", for: .normal)
         pokemonButton.addTarget(self, action: #selector(segueToPokemonSearchVC), for: .touchUpInside)
         self.view.addSubview(pokemonButton)
@@ -60,7 +60,7 @@ class MainViewController: UIViewController {
         categoryButton = UIButton.init(frame: CGRect.init(x: 0, y: 0, width: view.frame.width / 3, height: 50))
         categoryButton.center = CGPoint.init(x: view.frame.width / 2, y: view.frame.height / 2 + 130)
         categoryButton.layer.cornerRadius = 10
-        categoryButton.backgroundColor = constants.darkGrey
+        categoryButton.backgroundColor = Constants.darkGrey
         categoryButton.setTitle("Category", for: .normal)
         categoryButton.addTarget(self, action: #selector(segueToCategorySelectVC), for: .touchUpInside)
         self.view.addSubview(categoryButton)
@@ -68,7 +68,7 @@ class MainViewController: UIViewController {
         randomButton = UIButton.init(frame: CGRect.init(x: 0, y: 0, width: view.frame.width / 3, height: 50))
         randomButton.center = CGPoint.init(x: view.frame.width / 2, y: view.frame.height / 2 + 190)
         randomButton.layer.cornerRadius = 10
-        randomButton.backgroundColor = constants.darkGrey
+        randomButton.backgroundColor = Constants.darkGrey
         randomButton.setTitle("Randomize!", for: .normal)
         self.view.addSubview(randomButton)
     }
