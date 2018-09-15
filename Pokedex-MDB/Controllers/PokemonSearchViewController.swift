@@ -91,9 +91,15 @@ class PokemonSearchViewController: UITableViewController, UISearchResultsUpdatin
         if segue.identifier == "toProfileVC" {
             let profileVC = segue.destination as! ProfileViewController
             let key = sender as! String
-            profileVC.pokemonName = self.pokemonDictionary[key]?.name
-            profileVC.pokemonNumber = "\((self.pokemonDictionary[key]?.number)!)"
-            if let url = URL(string: (self.pokemonDictionary[key]?.imageUrl)!) {
+            let currentPokemon = self.pokemonDictionary[key]
+            profileVC.pokemonName = currentPokemon?.name
+            profileVC.pokemonNumber = "# \((currentPokemon?.number)!)"
+            profileVC.pokemonAttack = currentPokemon?.attack
+            profileVC.pokemonDefense = currentPokemon?.defense
+            profileVC.pokemonHealth = currentPokemon?.health
+            profileVC.pokemonSpAtt = currentPokemon?.specialAttack
+            profileVC.pokemonSpDef = currentPokemon?.specialDefense
+            if let url = URL(string: (currentPokemon?.imageUrl)!) {
                 if let data = try? Data(contentsOf: url) {
                     profileVC.pokemonImage = UIImage(data: data)
                 }
