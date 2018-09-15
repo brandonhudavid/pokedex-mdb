@@ -19,6 +19,7 @@ class TypeCell: UICollectionViewCell {
         typeImage = UIImageView(frame: CGRect(x: contentView.frame.width * 0.125, y: 0, width: contentView.frame.width * 0.75, height: contentView.frame.height * 0.75))
         typeImage.contentMode = .scaleAspectFit
         typeImage.clipsToBounds = true
+        typeImage.alpha = 1.0
         contentView.addSubview(typeImage)
         
         typeLabel = UILabel(frame: CGRect(x: 0, y: contentView.frame.height * 0.8, width: contentView.frame.width, height: contentView.frame.height * 0.2))
@@ -37,11 +38,12 @@ class TypeCell: UICollectionViewCell {
     func toggleSelected() {
         debugPrint(pressed)
         pressed = !pressed
+        
         if pressed {
-            self.alpha = 1.0
+            self.alpha = 0.5
             // typeImage.alpha = 1.0
         } else {
-            self.alpha = 0.5
+            self.alpha = 1.0
             // typeImage.alpha = 0.5
         }
     }

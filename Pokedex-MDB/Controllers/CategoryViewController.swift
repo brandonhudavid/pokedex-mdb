@@ -36,6 +36,10 @@ class CategoryViewController: UIViewController {
     var constants = Constants()
     var selectedTypes : [String]!
     
+    var attack: Int!
+    var defense: Int!
+    var health: Int!
+    
     @IBOutlet var typesCollection : UICollectionView!
     
     override func viewDidLoad() {
@@ -45,6 +49,10 @@ class CategoryViewController: UIViewController {
         view.backgroundColor = Constants.white
 
         selectedTypes = []
+        
+        attack = 0
+        health = 0
+        defense = 0
         
         createIcons()
         createTextFields()
@@ -120,7 +128,7 @@ class CategoryViewController: UIViewController {
         defenseInput.returnKeyType = UIReturnKeyType.done;
         defenseInput.clearButtonMode = UITextFieldViewMode.whileEditing;
         defenseInput.contentVerticalAlignment = UIControlContentVerticalAlignment.center;
-        
+
         view.addSubview(defenseInput)
         
         healthInput = UITextField(frame: CGRect(x: 0, y: 0, width: view.frame.width / 4, height: 40))
@@ -133,7 +141,7 @@ class CategoryViewController: UIViewController {
         healthInput.returnKeyType = UIReturnKeyType.done;
         healthInput.clearButtonMode = UITextFieldViewMode.whileEditing;
         healthInput.contentVerticalAlignment = UIControlContentVerticalAlignment.center;
-        
+
         view.addSubview(healthInput)
     }
     
@@ -146,18 +154,67 @@ class CategoryViewController: UIViewController {
         self.view.addSubview(searchButton)
     }
     
-    @objc func searchClicked()
-    {
+    @objc func searchClicked() {
+        let inputtedWordsAlert = UIAlertController (title: "Error", message: "Must input integers into the text fields", preferredStyle: UIAlertControllerStyle.alert)
+        inputtedWordsAlert.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: nil))
+        
+        let over200Alert = UIAlertController (title: "Error", message: "Minimum cannot be greater than 200", preferredStyle: UIAlertControllerStyle.alert)
+        over200Alert.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: nil))
+        
+        if attackInput.text != "" {
+            if let attackInt = Int(attackInput.text!) {
+                if attackInt > 200 {
+                    present(over200Alert, animated: true, completion: nil)
+                    return
+                }
+                attack = attackInt
+            } else {
+                present(inputtedWordsAlert, animated: true, completion: nil)
+                return
+            }
+        }
+        if defenseInput.text != "" {
+            if let defenseInt = Int(defenseInput.text!) {
+                if defenseInt > 200 {
+                    present(over200Alert, animated: true, completion: nil)
+                    return
+                }
+                defense = defenseInt
+            } else {
+                present(inputtedWordsAlert, animated: true, completion: nil)
+                return
+            }
+        }
+        if healthInput.text != "" {
+            if let healthInt = Int(healthInput.text!) {
+                if healthInt > 200 {
+                    present(over200Alert, animated: true, completion: nil)
+                    return
+                }
+                health = healthInt
+            } else {
+                present(inputtedWordsAlert, animated: true, completion: nil)
+                return
+            }
+        }
+        
         performSegue(withIdentifier: "toResultsVC", sender: self)
     }
-    
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
+    {
+        let resultsVC = segue.destination as! ResultsViewController
+        resultsVC.selectedTypes = selectedTypes
+        
+        debugPrint(attackInput, healthInput, defenseInput)
+
+        resultsVC.attackMinimum = attack
+        resultsVC.defenseMinimum = defense
+        resultsVC.healthMinimum = health
     }
 }

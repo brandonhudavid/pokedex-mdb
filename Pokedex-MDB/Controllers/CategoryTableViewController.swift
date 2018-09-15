@@ -42,7 +42,6 @@ extension CategoryViewController: UICollectionViewDelegate, UICollectionViewData
         
         typeCell.toggleSelected()
         
-        /*
         if typeCell.pressed {
             debugPrint(type)
             selectedTypes.append(type)
@@ -50,8 +49,8 @@ extension CategoryViewController: UICollectionViewDelegate, UICollectionViewData
             debugPrint(type)
             selectedTypes.remove(at: selectedTypes.index(of: type)!)
         }
-        debugPrint("Array: ", selectedTypes)
-        */
+        
+        debugPrint("Array: ", selectedTypes!)
         
     }
 
