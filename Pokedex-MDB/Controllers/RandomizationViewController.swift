@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class PokemonSearchViewController: UITableViewController, UISearchResultsUpdating {
+class RandomizationViewController: UITableViewController {
     
     var pokemonKeyArray = [String]()
     var pokemonDictionary: [String : Pokemon] = [:]
@@ -85,20 +85,14 @@ class PokemonSearchViewController: UITableViewController, UISearchResultsUpdatin
         }
         performSegue(withIdentifier: "toProfileVC", sender: self.filteredArray[indexPath.row])
     }
-
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toProfileVC" {
             let profileVC = segue.destination as! ProfileViewController
             let key = sender as! String
-            let currentPokemon = self.pokemonDictionary[key]
-            profileVC.pokemonName = currentPokemon?.name
-            profileVC.pokemonNumber = "# \((currentPokemon?.number)!)"
-            profileVC.pokemonAttack = currentPokemon?.attack
-            profileVC.pokemonDefense = currentPokemon?.defense
-            profileVC.pokemonHealth = currentPokemon?.health
-            profileVC.pokemonSpAtt = currentPokemon?.specialAttack
-            profileVC.pokemonSpDef = currentPokemon?.specialDefense
-            if let url = URL(string: (currentPokemon?.imageUrl)!) {
+            profileVC.pokemonName = self.pokemonDictionary[key]?.name
+            profileVC.pokemonNumber = "\((self.pokemonDictionary[key]?.number)!)"
+            if let url = URL(string: (self.pokemonDictionary[key]?.imageUrl)!) {
                 if let data = try? Data(contentsOf: url) {
                     profileVC.pokemonImage = UIImage(data: data)
                 }
@@ -107,5 +101,5 @@ class PokemonSearchViewController: UITableViewController, UISearchResultsUpdatin
             }
         }
     }
-
+    
 }

@@ -14,6 +14,7 @@ class ResultsViewController: UIViewController {
     var searchResults : [Pokemon]!
     
     var pokemonCollection : UICollectionView!
+    var mySegmentedControl : UISegmentedControl!
 
     var attackMinimum : Int = 0
     var defenseMinimum : Int = 0
@@ -27,6 +28,7 @@ class ResultsViewController: UIViewController {
         // Do any additional setup after loading the view.
         findPokemon(minAttack: attackMinimum, minDefense: defenseMinimum, minHealth: healthMinimum, types: selectedTypes)
         createTypes()
+        switchViews()
     }
 
     override func didReceiveMemoryWarning() {
@@ -42,7 +44,7 @@ class ResultsViewController: UIViewController {
         layout.minimumInteritemSpacing = 10
         layout.itemSize = CGSize(width: view.frame.width / 5, height: view.frame.width / 5)
         
-        pokemonCollection = UICollectionView(frame: CGRect(x: 20, y: 70, width: view.frame.width - 40, height: view.frame.height - 100), collectionViewLayout: layout)
+        pokemonCollection = UICollectionView(frame: CGRect(x: 20, y: 120, width: view.frame.width - 40, height: view.frame.height - 150), collectionViewLayout: layout)
         pokemonCollection.register(ResultCell.self, forCellWithReuseIdentifier: "resultsCell")
         pokemonCollection.backgroundColor = Constants.white
         pokemonCollection.showsVerticalScrollIndicator = true
@@ -75,6 +77,27 @@ class ResultsViewController: UIViewController {
             }
         }
         return false
+    }
+    
+    func switchViews()
+    {
+        mySegmentedControl = UISegmentedControl(items: ["Grid", "Table"])
+        let elementWidth : CGFloat = view.frame.width - 600
+        let elementHeight : CGFloat = 30
+        
+        mySegmentedControl.frame = CGRect(x: 0, y: 0, width: elementWidth, height: elementHeight)
+        mySegmentedControl.center = CGPoint(x: CGFloat(view.frame.width / 2), y: CGFloat(100))
+        
+        mySegmentedControl.selectedSegmentIndex = 1
+        mySegmentedControl.tintColor = Constants.darkGrey
+        mySegmentedControl.backgroundColor = Constants.silver
+        mySegmentedControl.addTarget(self, action: #selector(segmentedValueChanged(_:)), for: .valueChanged)
+        self.view.addSubview(mySegmentedControl)
+    }
+    
+    @objc func segmentedValueChanged(_ sender : UISegmentedControl!)
+    {
+        
     }
 
 }

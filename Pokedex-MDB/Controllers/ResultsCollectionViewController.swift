@@ -9,6 +9,7 @@
 import UIKit
 
 extension ResultsViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return searchResults.count
     }
@@ -35,6 +36,9 @@ extension ResultsViewController: UICollectionViewDelegate, UICollectionViewDataS
         } else {
             return UICollectionViewCell()
         }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     }
     
 }

@@ -21,13 +21,11 @@ class ProfileViewController: UIViewController {
     var statNames: [String]!
     var pokemonStatArray: [Int]!
     
-    
     var pokemonImageView: UIImageView!
     var pokemonNameLabel: UILabel!
     var pokemonNumberLabel: UILabel!
     var pokemonStatsLabel: UILabel!
     
-
     override func viewDidLoad() {
         super.viewDidLoad()
         statNames = ["Attack", "Defense", "Health", "Special Attack", "Special Defense"]
