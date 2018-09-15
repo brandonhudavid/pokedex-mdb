@@ -26,8 +26,6 @@ class ResultsViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         findPokemon(minAttack: attackMinimum, minDefense: defenseMinimum, minHealth: healthMinimum, types: selectedTypes)
-        debugPrint(allPokemon)
-        debugPrint("Search", searchResults)
         createTypes()
     }
 
@@ -42,12 +40,11 @@ class ResultsViewController: UIViewController {
         
         layout.minimumLineSpacing = 10
         layout.minimumInteritemSpacing = 10
-        layout.itemSize = CGSize(width: view.frame.width / 4, height: view.frame.width / 4)
+        layout.itemSize = CGSize(width: view.frame.width / 5, height: view.frame.width / 5)
         
-        pokemonCollection = UICollectionView(frame: CGRect(x: 20, y: 120, width: view.frame.width - 40, height: view.frame.height / 2 - 25), collectionViewLayout: layout)
-        pokemonCollection.register(ResultCell.self, forCellWithReuseIdentifier: "resultCell")
+        pokemonCollection = UICollectionView(frame: CGRect(x: 20, y: 70, width: view.frame.width - 40, height: view.frame.height - 100), collectionViewLayout: layout)
+        pokemonCollection.register(ResultCell.self, forCellWithReuseIdentifier: "resultsCell")
         pokemonCollection.backgroundColor = Constants.white
-        
         pokemonCollection.showsVerticalScrollIndicator = true
         pokemonCollection.allowsMultipleSelection = true
         
@@ -58,8 +55,9 @@ class ResultsViewController: UIViewController {
     }
     
     func findPokemon(minAttack: Int, minDefense: Int, minHealth: Int, types: [String]) -> [Pokemon]? {
+        searchResults = []
         for pokemon in allPokemon {
-            if pokemon.attack >= minAttack && pokemon.defense >= minDefense && pokemon.health >= minHealth && analyzeTypes(types1: types, types2: pokemon.types) {
+            if pokemon.attack >= minAttack && pokemon.defense >= minDefense && pokemon.health >= minHealth && analyzeTypes(selectedTypes, pokemon.types) {
                 searchResults?.append(pokemon)
             }
         }
@@ -67,50 +65,16 @@ class ResultsViewController: UIViewController {
         return searchResults
     }
     
-    func analyzeTypes(types1: [String], types2: [String]) -> Bool {
-        if types1.count != types2.count {
-            return false
+    func analyzeTypes(_ selectedTypes: [String], _ pokemonTypes: [String]) -> Bool {
+        if selectedTypes.count == 0 {
+            return true
         }
-        
-        for ty1 in types1 {
-            var identical = false
-            
-            for ty2 in types2 {
-                if ty1 == ty2 {
-                    identical = true
-                }
-            }
-            
-            if !identical {
-                return false
+        for pokemonType in pokemonTypes {
+            if selectedTypes.contains(pokemonType) {
+                return true
             }
         }
-        return true
+        return false
     }
 
-}
-
-extension ResultsViewController: UICollectionViewDelegate, UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return searchResults.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "resultsCell", for: indexPath) as? ResultCell {
-            
-            for subview in cell.contentView.subviews {
-                subview.removeFromSuperview()
-            }
-            
-            cell.awakeFromNib()
-            
-            cell.resultName.text = searchResults[indexPath.row].name!
-            cell.resultImage.image = UIImage(named: searchResults[indexPath.row].imageUrl)
-            
-            return cell
-        } else {
-            return UICollectionViewCell()
-        }
-    }
-    
 }

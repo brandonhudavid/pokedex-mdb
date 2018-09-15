@@ -26,7 +26,7 @@ class ResultCell: UICollectionViewCell {
         resultName.textAlignment = .center
         resultName.textColor = .black
         resultName.backgroundColor = .clear
-        resultName.font = UIFont(name: "AmericanTypewriter", size: 18.0)
+        resultName.font = UIFont(name: "AmericanTypewriter", size: 12.0)
         contentView.addSubview(resultName)
         
         resultCell = UIButton(frame: CGRect(x: 0, y: 0, width: contentView.frame.width-50, height: contentView.frame.height-50))
