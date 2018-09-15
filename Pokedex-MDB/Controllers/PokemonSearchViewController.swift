@@ -81,14 +81,26 @@ class PokemonSearchViewController: UITableViewController, UISearchResultsUpdatin
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "toProfileVC", sender: self)
+        self.dismiss(animated: true) {
+            print("dismissed")
+        }
+        performSegue(withIdentifier: "toProfileVC", sender: self.filteredArray[indexPath.row])
     }
 
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if segue.identifier == "toProfileVC" {
-//            let profileVC = segue.destination as! ProfileViewController
-//            profileVC.pokemonName = self.pokemonDictionary[]
-//        }
-//    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toProfileVC" {
+            let profileVC = segue.destination as! ProfileViewController
+            let key = sender as! String
+            profileVC.pokemonName = self.pokemonDictionary[key]?.name
+            profileVC.pokemonNumber = "\((self.pokemonDictionary[key]?.number)!)"
+            if let url = URL(string: (self.pokemonDictionary[key]?.imageUrl)!) {
+                if let data = try? Data(contentsOf: url) {
+                    profileVC.pokemonImage = UIImage(data: data)
+                }
+            } else if let data = try? Data(contentsOf: URL(string: "https://upload.wikimedia.org/wikipedia/en/3/39/Pokeball.PNG")!) {
+                profileVC.pokemonImage = UIImage(data: data)
+            }
+        }
+    }
 
 }
