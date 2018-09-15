@@ -23,7 +23,7 @@ extension CategoryViewController: UICollectionViewDelegate, UICollectionViewData
             }
             
             cell.awakeFromNib()
-
+            
             cell.typeLabel.text = Constants.pokemonTypes[indexPath.row]
             cell.typeImage.image = UIImage(named: Constants.pokemonTypes[indexPath.row])
             
@@ -31,7 +31,6 @@ extension CategoryViewController: UICollectionViewDelegate, UICollectionViewData
         } else {
             return UICollectionViewCell()
         }
-        
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

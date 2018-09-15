@@ -82,6 +82,7 @@ class CategoryViewController: UIViewController {
         
         view.addSubview(typesCollection)
     }
+    
     private func createIcons()
     {
         attackIcon = UIImageView(frame: CGRect(x: 0, y: 0, width: view.frame.width / 5, height: view.frame.height / 5))
